@@ -1,4 +1,4 @@
-import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable } from 'rxjs';
 import { DatabaseStateMerger } from '../../../interface';
 import { PriceDuration, TokenPriceHistory } from '../../../state-types';
 import _ from 'lodash';

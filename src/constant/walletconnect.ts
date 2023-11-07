@@ -1,9 +1,7 @@
 import { UniversalProviderOpts } from '@walletconnect/universal-provider';
 import { AppName, getAppName } from '../util/app';
-import { NET_ETHEREUM, NET_GOERLI, NET_BNB, NET_BNB_TEST, NET_ARBITRUM, NET_ARBITRUM_GOERLI } from './network';
+import { NET_ARBITRUM, NET_ARBITRUM_GOERLI, NET_BNB, NET_BNB_TEST, NET_ETHEREUM, NET_GOERLI } from './network';
 import { ConnectParams } from '@walletconnect/universal-provider/dist/types/types';
-
-const IS_TEST_ENV = true;
 
 export const RpcMethod = []; //['eth_sendTransaction', 'eth_accounts', 'eth_requestAccounts'];
 export const RpcEvent = []; //['accountsChanged', 'chainChanged', 'message', 'disconnect', 'connect'];
@@ -20,86 +18,55 @@ export const WcChainId = {
 };
 
 export function wcProviderInitOps(): UniversalProviderOpts {
-  const appName: AppName = getAppName();
-
-  return appName === AppName.Stone
-    ? {
-        projectId: '9155bc0988aa999a5bdf4069c4d050e7',
-        metadata: {
-          name: 'StakeStone',
-          description: 'Stake, But More',
-          url: 'https://stakestone.io',
-          icons: [],
-        },
-        logger: 'error',
-      }
-    : {
-        projectId: '4473e1279621240809d6ecaf56415dbb',
-        metadata: {
-          name: 'ShieldOption',
-          url: 'https://shieldex.io',
-          description: '',
-          icons: [],
-        },
-      };
+  return {
+    projectId: '4473e1279621240809d6ecaf56415dbb',
+    metadata: {
+      name: 'Doption',
+      url: 'https://doption.net',
+      description: '',
+      icons: [],
+    },
+  };
 }
 
 export function wcDefaultChain(): string {
   const appName: AppName = getAppName();
 
   switch (appName) {
-    case AppName.Stone: {
-      return IS_TEST_ENV ? WcChainId.Goerli : WcChainId.Ethereum;
+    case AppName.ShieldTrade: {
+      return WcChainId.Bnb;
     }
     default: {
-      return WcChainId.Goerli;
+      return WcChainId.Bnb;
     }
   }
 }
 
 export function wcConnectOps(): ConnectParams {
-  const appName: AppName = getAppName();
-
-  switch (appName) {
-    case AppName.Stone: {
-      return {
-        namespaces: {
-          eip155: {
-            chains: IS_TEST_ENV ? [WcChainId.Goerli] : [WcChainId.Ethereum],
-            defaultChain: wcDefaultChain(),
-            methods: RpcMethod,
-            events: RpcEvent,
-            rpcMap: {
-              [WcChainId.BnbTest]: 'https://data-seed-prebsc-2-s2.binance.org:8545',
-            },
-          },
+  return {
+    namespaces: {
+      eip155: {
+        chains: [WcChainId.Bnb],
+        defaultChain: WcChainId.Bnb,
+        methods: RpcMethod,
+        events: RpcEvent,
+        rpcMap: {
+          [WcChainId.BnbTest]: 'https://data-seed-prebsc-2-s2.binance.org:8545',
+          [WcChainId.Bnb]: 'https://bscrpc.com',
         },
-        optionalNamespaces: {
-          eip155: {
-            chains: IS_TEST_ENV
-              ? [WcChainId.Goerli, WcChainId.BnbTest, WcChainId.ArbitrumGoerli]
-              : [WcChainId.Ethereum, WcChainId.Bnb, WcChainId.Arbitrum],
-            defaultChain: wcDefaultChain(),
-            methods: RpcMethod,
-            events: RpcEvent,
-            rpcMap: {
-              [WcChainId.BnbTest]: 'https://data-seed-prebsc-2-s2.binance.org:8545',
-            },
-          },
+      },
+    },
+    optionalNamespaces: {
+      eip155: {
+        chains: [WcChainId.Bnb],
+        defaultChain: WcChainId.Bnb,
+        methods: RpcMethod,
+        events: RpcEvent,
+        rpcMap: {
+          [WcChainId.BnbTest]: 'https://data-seed-prebsc-2-s2.binance.org:8545',
+          [WcChainId.Bnb]: 'https://bscrpc.com',
         },
-      };
-    }
-    default: {
-      return {
-        namespaces: {
-          eip155: {
-            chains: [WcChainId.Goerli],
-            defaultChain: WcChainId.Goerli,
-            methods: [],
-            events: [],
-          },
-        },
-      };
-    }
-  }
+      },
+    },
+  };
 }

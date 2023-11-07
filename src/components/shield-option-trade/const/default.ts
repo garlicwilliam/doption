@@ -28,8 +28,8 @@ const PAIR_CONFIG = {
   [NET_BNB]: {
     indexUnderlying: IndexUnderlyingType.BTC,
     quoteToken: {
-      symbol: 'POT',
-      address: '0x5150404c61706b6874cF43DC34c9CA88DaA5F9e3',
+      symbol: 'DOP',
+      address: '0xb9c01F9160003CDB05689B47C001667D381760f9',
       decimal: 18,
       network: NET_BNB,
     },

@@ -46,7 +46,7 @@ export class BecomeSpark extends BaseStateComponent<IProps, IState> {
 
           <FixPadding top={40} bottom={0} mobTop={30} mobBottom={0}>
             <VerticalItem
-              label={'40%'}
+              label={'30%'}
               labelClassName={styleMr(styles.rate, fontCss.bold)}
               valueClassName={styleMr(styles.desc)}
               gap={'10px'}

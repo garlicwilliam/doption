@@ -88,7 +88,7 @@ export class MergerHistoryOrders implements DatabaseStateMerger<ShieldOrderInfo[
       query: `{closeOrders(
             orderBy: blockTimestamp,
             orderDirection: desc,
-            where: { holder: "${user}", state_in: [1,2,3,4] },
+            where: { holder: "${user}", state_not: 0 },
             first: ${count}) {
               holder,
               token,

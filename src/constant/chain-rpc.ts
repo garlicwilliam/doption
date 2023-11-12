@@ -1,6 +1,14 @@
-import { NET_BNB, NET_BNB_TEST, NET_ETHEREUM, NET_GOERLI, NET_MANTA_PACIFIC, NET_MANTA_PACIFIC_TEST } from './network';
+import {
+  NET_BNB,
+  NET_BNB_TEST,
+  NET_ETHEREUM,
+  NET_GOERLI,
+  NET_MANTA_PACIFIC,
+  NET_MANTA_PACIFIC_TEST,
+  Network,
+} from './network';
 
-export const RPC_URLS = {
+export const RPC_URLS: { [k in Network]?: string } = {
   [NET_BNB_TEST]: 'https://data-seed-prebsc-2-s2.binance.org:8545/',
   [NET_BNB]: 'https://bscrpc.com',
   [NET_ETHEREUM]: 'https://mainnet.infura.io/v3/abc4c36a4ae54715bc7a4ecedd5a8490',
